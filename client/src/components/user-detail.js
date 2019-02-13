@@ -51,7 +51,7 @@ class UserDetail extends Component {
 				<tr key={repo.id}>
 					<td>{repo.id}</td>
 					<td>{repo.name}</td>
-					<td><a href={repo.url}>{repo.url}</a></td>
+					<td><a href={repo.html_url}>{repo.html_url}</a></td>
 				</tr>
 			)
 		})
