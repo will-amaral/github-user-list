@@ -16,7 +16,7 @@ class UserDetail extends Component {
 	}
 
 	loadUser() {
-		fetch(`http://localhost:3001/api/users/${this.props.details}/details`)
+		fetch(`http://localhost:3001/api/users/${this.props.login}/details`)
 		.then(res => res.json())
 		.then(res => {
 			this.setState({
@@ -31,7 +31,7 @@ class UserDetail extends Component {
 	}
 
 	loadRepositories() {
-		fetch(`http://localhost:3001/api/users/${this.props.details}/repos`)
+		fetch(`http://localhost:3001/api/users/${this.props.login}/repos`)
 		.then(res => res.json())
 		.then(res => {
 			this.setState({

@@ -20,7 +20,6 @@ class App extends Component {
 	}
 
 	onLoad() {
-		console.log('Executando. Since = ' + this.state.since)
 		fetch(`http://localhost:3001/api/users?since=${this.state.since}`)
 		.then(res => res.json())
 		.then(res => {
