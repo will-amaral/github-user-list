@@ -1,9 +1,67 @@
 import React, { Component } from 'react';
+import UserList from './user-list';
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			data: [],
+			userDetail: null,
+			isLoading: true,
+			page: 1,
+			since: 0
+		};
+	}
+
+	componentDidMount() {
+		this.onLoad();
+	}
+
+	onLoad() {
+		console.log('Executando. Since = ' + this.state.since)
+		fetch(`http://localhost:3001/api/users?since=${this.state.since}`)
+		.then(res => res.json())
+		.then(res => {
+			this.setState({data: res.data, isLoading: false})
+		});
+	}
+
+	onclick(type){
+    this.setState(prevState => {
+       return {
+       	isLoading: true,
+       	page: type == 'add' ? prevState.page + 1 : prevState.page - 1,
+       	since: type == 'add' ? prevState.since + 30 : prevState.since - 30,
+       }
+    }, () => { this.onLoad() }
+    );
+  }
+
+  renderPrevious() {
+  	let previous;
+
+  	if(this.state.page > 1) {
+  		previous = <button className="pagination-previous" onClick={this.onclick.bind(this, 'sub')}>Previous Page</button>
+  		return previous;
+  	}
+  }
+
 	render() {
+    if (this.state.isLoading) {
+      return <p>Loading ...</p>;
+    }
+
 		return (
-			<h1>React funcionando</h1>
+			<section className="container">
+				<div className="section">
+					<nav className="pagination is-centered" role="navigation" aria-label="pagination">
+						{this.renderPrevious()}
+						<button className="pagination-next" onClick={this.onclick.bind(this, 'add')}>Next Page</button>
+					</nav>
+					<UserList users={this.state.data} />
+				</div>
+			</section>
 		);
 	}
 }
