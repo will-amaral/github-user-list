@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserList from './user-list';
+import UserDetail from './user-detail';
 
 class App extends Component {
 	constructor(props) {
@@ -10,7 +11,7 @@ class App extends Component {
 			userDetail: null,
 			isLoading: true,
 			page: 1,
-			since: 0
+			since: 0,
 		};
 	}
 
@@ -40,7 +41,6 @@ class App extends Component {
 
   renderPrevious() {
   	let previous;
-
   	if(this.state.page > 1) {
   		previous = <button className="pagination-previous" onClick={this.onclick.bind(this, 'sub')}>Previous Page</button>
   		return previous;
@@ -52,14 +52,20 @@ class App extends Component {
       return <p>Loading ...</p>;
     }
 
+    if (this.state.userDetail !== null) {
+    	return <UserDetail login={this.state.userDetail} returnNull={userDetail => this.setState({ userDetail })}/>
+    }
+
 		return (
 			<section className="container">
 				<div className="section">
-					<nav className="pagination is-centered" role="navigation" aria-label="pagination">
-						{this.renderPrevious()}
-						<button className="pagination-next" onClick={this.onclick.bind(this, 'add')}>Next Page</button>
-					</nav>
-					<UserList users={this.state.data} />
+					<div className="row">
+						<nav className="pagination is-centered" role="navigation" aria-label="pagination">
+							{this.renderPrevious()}
+							<button className="pagination-next" onClick={this.onclick.bind(this, 'add')}>Next Page</button>
+						</nav>						
+					</div>
+					<UserList users={this.state.data} onSelect={userDetail => this.setState({ userDetail })}/>
 				</div>
 			</section>
 		);

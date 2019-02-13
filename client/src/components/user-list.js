@@ -3,7 +3,7 @@ import User from './user';
 
 const UserList = (props) => {
 	const users = props.users.map((user) => {
-		return <User key={user.id} details={user} />
+		return <User key={user.id} details={user} onSelect={props.onSelect}/>
 	});
 
 	return (

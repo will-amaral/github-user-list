@@ -2,7 +2,7 @@ import React from 'react';
 
 const User = (props) => {
 	return (
-		<li className="column is-one-quarter">
+		<li onClick={() => props.onSelect(props.details.login)} className="column is-one-quarter">
 			<div className="card">
 				<div className="card-image">
 					<figure className="image is-4by3">
