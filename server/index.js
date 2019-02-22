@@ -1,10 +1,16 @@
+// Here, we import the necessary modules for the project. The Octokit module
+// is the official Github API module for Node.js
 const Octokit = require('@octokit/rest');
 const octokit = new Octokit({
+	// You can replace this token with your own token
 	auth: 'token 311d4797cbdd7415106e8097518f1d32389e4601'
 });
 const cors = require('cors');
 const app = require('express')();
 
+// To modularize our proxy API, we use three different functions to 
+// retrieve data from Github. For bigger applications, you can separate
+// the functions in different files and import in the same way you import modules. 
 const getUsers = (since) => {
 	let data = octokit.users.list({since});
 	return data;
@@ -20,8 +26,12 @@ const getUserRepos = (username) => {
 	return data;
 }
 
+// The CORS module stands for Cross Origin Reference ..
 app.use(cors());
 
+// The endpoints for the api use the query params 
+// object to pass the necessary info to our functions. 
+// The result is then send as a Json object
 app.get('/api/users', async (req, res) => {
 	try {
 		const users = await getUsers(req.query.since);
@@ -50,6 +60,7 @@ app.get('/api/users/:username/repos', async (req, res) => {
 	}
 });
 
+// Customize the server when used in production
 app.listen(3001, () => {
-	console.log('Servidor na porta 3001')
+	console.log('Server running at port 3001')
 });

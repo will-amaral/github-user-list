@@ -27,7 +27,7 @@ class UserDetail extends Component {
 				avatar: res.data.avatar_url,
 				name: res.data.name
 			})
-		});
+		})
 	}
 
 	loadRepositories() {
@@ -43,7 +43,11 @@ class UserDetail extends Component {
 
 	render() {
 		if (this.state.isLoading) {
-      return <p>Loading ...</p>;
+      return (
+				<div className="loader-container">
+					<div className="loader"></div>
+				</div>
+      )
     }
 
 		const repo = this.state.repos.map((repo)=>{
@@ -57,14 +61,16 @@ class UserDetail extends Component {
 		})
 
 		return (
-			<section className="container">
-				<div className="section">
-					<div className="row columns column">
-						<button className="button" onClick={() => this.props.returnNull(null)}>Voltar</button>
+			<section className="section">
+				<div className="container">
+					<div className="row columns">
+						<div className="column">
+							<button className="button" onClick={() => this.props.returnNull(null)}>Return</button>
+						</div>
 					</div>
 					<div className="row columns">
 						<div className="column is-one-third">
-							<figure className="image is-4by3">
+							<figure className="image is-1by1">
 								<img src={this.state.avatar} alt="Avatar"/>
 							</figure>
 						</div>
@@ -72,12 +78,17 @@ class UserDetail extends Component {
 							<p className="subtitle is-4">@{this.state.login}</p>
 							<p className="title is-1">{this.state.name}</p>
 							<p className="subtitle is-6 is-spaced">User Id:{this.state.id}</p>
-							<p className="subtitle is-5">profile: <a href={this.state.profile}>{this.state.profile}</a></p>
+							<p className="title is-5">profile: <a href={this.state.profile}>{this.state.profile}</a></p>
+							<p className="subtitle is-6">Created at: {new Intl.DateTimeFormat('en-US', { 
+																													    year: 'numeric', 
+																													    month: 'long', 
+																													    day: '2-digit' 
+																													}).format(new Date(this.state.date))}</p>
 						</div>
 					</div>
 					<h1 className="title">Repositories</h1>
-					<div className="row columns column">
-						<table className="table">
+					<div className="row columns column table-wrapper">
+						<table className="table is-fullwidth">
 							<thead>
 								<tr>
 									<th>ID</th>

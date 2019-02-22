@@ -5,7 +5,7 @@ const User = (props) => {
 		<li onClick={() => props.onSelect(props.details.login)} className="column is-one-quarter">
 			<div className="card">
 				<div className="card-image">
-					<figure className="image is-4by3">
+					<figure className="image is-1by1">
 						<img src={props.details.avatar_url} alt="Avatar"/>
 					</figure>
 				</div>

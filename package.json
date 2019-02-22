@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",
+    "bulma-pageloader": "^2.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "react": "^16.8.1",

@@ -47,8 +47,12 @@ class App extends Component {
   }
 
 	render() {
-    if (this.state.isLoading) {
-      return <p>Loading ...</p>;
+		if (this.state.isLoading) {
+      return (
+				<div className="loader-container">
+					<div className="loader"></div>
+				</div>
+      )
     }
 
     if (this.state.userDetail !== null) {
@@ -56,13 +60,15 @@ class App extends Component {
     }
 
 		return (
-			<section className="container">
-				<div className="section">
-					<div className="row">
-						<nav className="pagination is-centered" role="navigation" aria-label="pagination">
-							{this.renderPrevious()}
-							<button className="pagination-next" onClick={this.onclick.bind(this, 'add')}>Next Page</button>
-						</nav>						
+			<section className="section">
+				<div className="container">
+					<div className="row columns">
+						<div className="column">
+							<nav className="pagination is-centered" role="navigation" aria-label="pagination">
+								{this.renderPrevious()}
+								<button className="pagination-next" onClick={this.onclick.bind(this, 'add')}>Next Page</button>
+							</nav>	
+						</div>					
 					</div>
 					<UserList users={this.state.data} onSelect={userDetail => this.setState({ userDetail })}/>
 				</div>
