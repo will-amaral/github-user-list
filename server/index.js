@@ -2,8 +2,9 @@
 // is the official Github API module for Node.js
 const Octokit = require('@octokit/rest');
 const octokit = new Octokit({
-	// You can replace this token with your own token
-	auth: 'token 311d4797cbdd7415106e8097518f1d32389e4601'
+	// Replace this string with your own token. You can do it at
+	// https://github.com/settings/tokens
+	auth: 'token MY GITHUB TOKEN'
 });
 const cors = require('cors');
 const app = require('express')();
@@ -26,7 +27,8 @@ const getUserRepos = (username) => {
 	return data;
 }
 
-// The CORS module stands for Cross Origin Reference ..
+// The CORS module stands for Cross Origin Resource Sharing
+// Learn more about CORS at https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 app.use(cors());
 
 // The endpoints for the api use the query params 
