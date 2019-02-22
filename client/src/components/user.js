@@ -2,7 +2,7 @@ import React from 'react';
 
 const User = (props) => {
 	return (
-		<li onClick={() => props.onSelect(props.details.login)} className="column is-one-quarter">
+		<li onClick={() => props.onSelect(props.details.login)} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-widescreen">
 			<div className="card">
 				<div className="card-image">
 					<figure className="image is-1by1">

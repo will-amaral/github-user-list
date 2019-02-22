@@ -7,7 +7,7 @@ const UserList = (props) => {
 	});
 
 	return (
-		<ul className="row columns is-multiline">
+		<ul className="row columns is-multiline is-mobile">
 			{users}
 		</ul>
 	);
